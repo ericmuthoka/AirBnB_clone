@@ -3,6 +3,7 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User  # Import User class
 from datetime import datetime
 
 
