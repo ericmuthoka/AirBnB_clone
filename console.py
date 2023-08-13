@@ -1,40 +1,28 @@
 #!/usr/bin/python3
-"""
-Module for the entry point of the command interpreter.
-"""
 
 import cmd
 
 
 class HBNBCommand(cmd.Cmd):
     """Custom command interpreter."""
-
+    
     prompt = "(hbnb) "
 
-    def do_quit(self, _):
-        """Quits the program."""
-        print("Goodbye!")
-        exit()
+    def do_quit(self, line):
+        """Quit the program."""
+        return True
 
-    def do_EOF(self, _):
-        """Exits the program on Ctrl+D."""
-        return self.do_quit(_)
-
-    def do_help(self, _):
-        """Displays help information."""
-        print("Available commands:")
-        for method_name in dir(self):
-            if method_name.startswith("do_"):
-                command = method_name[3:]
-                print(f"  {command}")
-
-    def emptyline(self):
-        """Does nothing on an empty line."""
-        pass
+    def do_EOF(self, line):
+        """Exit the program on Ctrl+D."""
+        return True
 
     def help_help(self):
         """Help for the help command."""
-        print("The help command shows a list of all the available commands.")
+        print("Displays list of all the available commands.")
+
+    def emptyline(self):
+        """Do nothing on an empty line."""
+        pass
 
 
 if __name__ == "__main__":
