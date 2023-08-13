@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Module for the entry point of the command interpreter"""
+"""
+Module for the entry point of the command interpreter.
+"""
 
 import cmd
 
@@ -21,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, _):
         """Displays help information."""
         print("Available commands:")
-        for command in self.commands.keys():
+        for command in self.get_names():
             print(f"  {command}")
 
     def emptyline(self):
@@ -34,4 +36,6 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+    cmd = HBNBCommand()
+    cmd.do_help(None)  # Display initial help message
+    cmd.cmdloop()
