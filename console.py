@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+"""
+This is the entry point of the command interpreter.
+"""
 
 import cmd
-
 
 class HBNBCommand(cmd.Cmd):
     """Custom command interpreter."""
@@ -18,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_help(self):
         """Help for the help command."""
-        print("Displays list of all the available commands.")
+        print("The help command displays a list of all the available commands.")
 
     def emptyline(self):
         """Do nothing on an empty line."""
