@@ -23,8 +23,10 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, _):
         """Displays help information."""
         print("Available commands:")
-        for command in self.commands.keys():
-            print(f"  {command}")
+        for method_name in dir(self):
+            if method_name.startswith("do_"):
+                command = method_name[3:]
+                print(f"  {command}")
 
     def emptyline(self):
         """Does nothing on an empty line."""
