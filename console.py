@@ -67,8 +67,32 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def do_all(self, line):
+        """Prints all string representation of all instances based
+        or not on the class name.
+        Usage: all [class name]
+        """
+        args = line.split()
+        all_objects = storage.all()
+        objects_to_print = []
+
+        if not args:
+            for obj in all_objects.values():
+                objects_to_print.append(str(obj))
+        elif args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+            print("** class doesn't exist **")
+            return
+        else:
+            for key in all_objects.keys():
+                if key.startswith(args[0]):
+                    objects_to_print.append(str(all_objects[key]))
+
+        print(objects_to_print)
+
     def do_update(self, args):
-        """Update an instance based on the class name and id."""
+        """Update an instance based on the class name and id.
+        Usage: update <class name> <id> <attribute name> "<attribute value>"
+        """
         args_list = args.split()
         if not args_list:
             print("** class name missing **")
