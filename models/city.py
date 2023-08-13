@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-City Module - Contains City class that inherits from BaseModel
+City Module - Contain City class that inherits from BaseModel
 """
 
 from models.base_model import BaseModel

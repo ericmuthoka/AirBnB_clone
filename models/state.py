@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-State Module - Contains State class that inherits from BaseModel
+State Module - Contain State class that inherits from BaseModel
 """
 
 from models.base_model import BaseModel

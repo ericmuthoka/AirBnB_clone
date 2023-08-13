@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Review Module - Contains Review class that inherits from BaseModel
+Review Module - Contain Review class that inherits from BaseModel
 """
 
 from models.base_model import BaseModel

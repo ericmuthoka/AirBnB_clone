@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Amenity Module - Contains Amenity class that inherits from BaseModel
+Amenity Module - Contain Amenity class that inherits from BaseModel
 """
 
 from models.base_model import BaseModel
