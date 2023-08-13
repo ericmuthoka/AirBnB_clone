@@ -23,19 +23,17 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, _):
         """Displays help information."""
         print("Available commands:")
-        for command in self.get_names():
+        for command in self.commands.keys():
             print(f"  {command}")
 
     def emptyline(self):
         """Does nothing on an empty line."""
         pass
 
-    def help_quit(self):
-        """Help for the quit command."""
-        print("Quit command to exit the program")
+    def help_help(self):
+        """Help for the help command."""
+        print("The help command displays a list of all the available commands.")
 
 
 if __name__ == "__main__":
-    cmd = HBNBCommand()
-    cmd.do_help(None)  # Display initial help message
-    cmd.cmdloop()
+    HBNBCommand().cmdloop()
