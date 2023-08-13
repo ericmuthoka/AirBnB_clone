@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import cmd
 
 
@@ -24,6 +26,10 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Does nothing on an empty line."""
         pass
+
+    def help_quit(self):
+        """Help for the quit command."""
+        print("Quit command to exit the program")
 
 
 if __name__ == "__main__":
