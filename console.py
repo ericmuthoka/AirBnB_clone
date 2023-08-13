@@ -10,6 +10,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models.user import User
 from models import storage
 
 
@@ -41,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
-        elif line not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        elif line not in ["BaseModel", "State", "City", "Amenity", "Place", "Review", "User"]:
             print("** class doesn't exist **")
         else:
             new_instance = eval(f"{line}()")
@@ -55,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         if not args:
             print("** class name missing **")
-        elif args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        elif args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review", "User"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -79,12 +80,15 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             for obj in all_objects.values():
                 objects_to_print.append(str(obj))
-        elif args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review"]:
+        elif args[0] not in ["BaseModel", "State", "City", "Amenity", "Place", "Review", "User"]:
             print("** class doesn't exist **")
             return
         else:
+            class_name = args[0]
+            if class_name == "User":
+                class_name = "users"  # Convert to the attribute name in storage
             for key in all_objects.keys():
-                if key.startswith(args[0]):
+                if key.startswith(class_name):
                     objects_to_print.append(str(all_objects[key]))
 
         print(objects_to_print)
@@ -129,6 +133,21 @@ class HBNBCommand(cmd.Cmd):
                 print("** value must be a valid " + str(attr_type))
         else:
             print("** attribute doesn't exist **")
+
+    def do_count(self, line):
+        """Retrieve the number of instances of a class.
+        Usage: <class name>.count()
+        """
+        args = line.split('.')
+        if len(args) != 2 or args[1] != "count()":
+            print("** invalid command **")
+            return
+        class_name = args[0]
+        if class_name == "User":
+            class_name = "users"  # Convert to the attribute name in storage
+        all_objects = storage.all()
+        count = sum(1 for key in all_objects.keys() if key.startswith(class_name))
+        print(count)
 
 
 if __name__ == "__main__":
