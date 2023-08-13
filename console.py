@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_help(self):
         """Help for the help command."""
-        print("The help command displays a list of all the available commands.")
+        print("The help command shows a list of all the available commands.")
 
 
 if __name__ == "__main__":
