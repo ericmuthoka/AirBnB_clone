@@ -15,7 +15,7 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """Custom command interpreter."""
-    
+
     prompt = "(hbnb) "
 
     def do_quit(self, line):
@@ -67,7 +67,45 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    # Implement other commands (destroy, update, all) for other classes
+    def do_update(self, args):
+        """Update an instance based on the class name and id."""
+        args_list = args.split()
+        if not args_list:
+            print("** class name missing **")
+            return
+        if args_list[0] not in ["BaseModel", "User"]:
+            print("** class doesn't exist **")
+            return
+        if len(args_list) < 2:
+            print("** instance id missing **")
+            return
+
+        all_objects = storage.all()
+        key = f"{args_list[0]}.{args_list[1]}"
+        if key not in all_objects:
+            print("** no instance found **")
+            return
+
+        obj = all_objects[key]
+        if len(args_list) < 3:
+            print("** attribute name missing **")
+            return
+        if len(args_list) < 4:
+            print("** value missing **")
+            return
+
+        attr_name = args_list[2]
+        if hasattr(obj, attr_name):
+            attr_type = type(getattr(obj, attr_name))
+            try:
+                attr_value = attr_type(args_list[3])
+                setattr(obj, attr_name, attr_value)
+                obj.save()
+            except ValueError:
+                print("** value must be a valid " + str(attr_type))
+        else:
+            print("** attribute doesn't exist **")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
